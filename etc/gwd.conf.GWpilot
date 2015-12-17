@@ -1,0 +1,132 @@
+#*******************************************************************************
+#                           GW Daemon CONFIGURATION FILE
+#                           ----------------------------
+# Syntax
+#   VARIABLE = "VALUE"
+#   '#' Comments
+#
+#*******************************************************************************
+# Daemon port and number of connections
+#
+GWD_PORT              = 6725
+MAX_NUMBER_OF_CLIENTS = 25
+#
+#-------------------------------------------------------------------------------
+# Size of pools
+#
+# NUMBER_OF_ARRAYS: The number of array-jobs that will be handled by the
+# scheduler. (Default value is 20)
+#
+# NUMBER_OF_JOBS: The number of jobs that will be handled by the scheduler.
+# (Default value is 200)
+#
+# NUMBER_OF_HOSTS: The number of hosts that will be handled by the scheduler.
+# (Default value is 100)
+#
+# NUMBER_OF_USERS: The number of differnt users. (Default value is 30)
+#
+#
+NUMBER_OF_ARRAYS = 20
+NUMBER_OF_JOBS   = 5000
+NUMBER_OF_HOSTS  = 5000
+NUMBER_OF_USERS  = 30
+#
+#-------------------------------------------------------------------------------
+# Intervals
+#
+# SCHEDULING_INTERVAL : Period between two scheduling actions. (Default is 15
+# seconds)
+#
+# DISCOVERY_INTERVAL: How often the information manager searches the Grid for
+# new hosts. (Default is 300 seconds)
+#
+# MONITORING_INTERVAL: How often the information manager updates the
+# information of each resource. (Default is 180 seconds)
+#
+# POLL_INTERVAL: How often the underlying grid middleware is query about
+# job state. (Default is 300 seconds)
+#
+#
+SCHEDULING_INTERVAL = 10
+DISCOVERY_INTERVAL  = 300
+MONITORING_INTERVAL = 180
+POLL_INTERVAL       = 300
+#
+#-------------------------------------------------------------------------------
+# Middleware Access Drivers (MADs)
+#
+# These programs interface with specific Grid Services.
+# Check the GridWay developer guide if you need help to develop your own
+# drivers for your testbed.
+# 
+# IM_MAD: Information Manager MAD. Format:
+#   <mad_name>:<path_to_mad>:[args]:<tm_mad_name>:<em_mad_name>
+# Use an absolute path or include them in the PATH variable.
+#
+# TM_MAD: Transfer Manager MAD. Format:
+#   <mad_name>:<path_to_mad>:[args]
+# Use an absolute path or include them in the PATH variable.
+#
+# EM_MAD: Execution Manager MAD. Format:
+#   <mad_name>:<path_to_mad>:[args]:(rsl|rsl_nsh|rsl2)
+#
+# <mad_name> is used for logging or for referring to the MAD.
+# <path_to_mad> is a path to the MAD executable. 
+#     For the IM and you can use an absolute path or include the driver in the 
+#     PATH variable.
+#     For the EM and TM MADs is the name of the driver executable.
+#     It MUST be placed in the $GW_LOCATION/bin directory.
+# [args] are additional arguments to be passed to the MAD.
+# <tm_mad_name> is the TM MAD to be used with the hosts managed by this IM MAD.
+# <em_mad_name> is the EM MAD to be used with the hosts managed by this IM MAD.
+#     (rsl|rsl_nsh|rsl2) is the type of RSL to use with this EM MAD
+#
+#-------------------------------------------------------------------------------
+# YOU CAN CONFIGURE SEVERAL TESTBEDS
+#-------------------------------------------------------------------------------
+#
+
+#-------------------------------------------------------------------------------
+# GWpilot: Configuration Example
+#-------------------------------------------------------------------------------
+#
+# Information Manager, you must set the fifo file to be created, (it is shared by users)
+# IM_MAD = pilot_im:gw_im_mad_GWutils_callback:/opt/gridway/5.14.0/var/callback_fifo:dummy:pilot_em
+#
+# Execution Manager, you must set GWpilot options.
+# (a) without automatically enabling GWpilot Factory:
+#
+# EM_MAD = pilot_em:gw_em_mad_GWutils_launcher:/opt/gridway/5.14.0/libexec/python/GWpilot/em_mad_GWpilot.py -f 20 -i 31 -p 24994 -l --nosec -w /opt/gridway/5.14.0/var/callback_fifo:rsl_nsh
+#
+# (b) with GWpilot Factory:
+#
+# EM_MAD = pilot_em:gw_em_mad_GWutils_launcher:/opt/gridway/5.14.0/libexec/python/GWpilot/em_mad_GWpilot.py -f 20 -i 31 -p 24997 -l --nosec -w /opt/gridway/5.14.0/var/callback_fifo -F -n 1000:rsl_nsh
+#
+## Transfer Manager,
+# (a) through GASS:
+#
+# TM_MAD = dummy:gw_tm_mad_dummy:-g
+#
+# (b) through GridFTP (need host certificate and gridmapfile in /etc/grid-security)
+#
+# TM_MAD = dummy:gw_tm_mad_dummy:-u gsiftp\://<hostname>
+#
+#-------------------------------------------------------------------------------
+
+#
+#-------------------------------------------------------------------------------
+# Scheduler module
+#
+# This program schedules jobs over available resources.
+# Check the GridWay developer guide if you need help to develop your own
+# schedulers.
+#
+# DM_SCHED: Distpatch Manager Scheduler. Format:
+#   <sched_name>:<path_to_sched>:[args]
+#
+# <sched_name> is used for logging.
+# <path_to_sched> is a path to the Scheduler executable. Use an absolute path or
+# include it in the PATH variable.
+#
+# Default scheduler for GridWay.Configure the scheduling policies in sched.conf
+DM_SCHED  = builtin:gw_sched:

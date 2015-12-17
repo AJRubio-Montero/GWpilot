@@ -1,0 +1,170 @@
+===== LICENSE =====
+
+Copyright 2010-2015, A.J. Rubio-Montero (CIEMAT - Sci-track R&D group)         
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+===== ADDITIONAL LICENSE STATEMENT ===== 
+
+If you use this code to perform any kind of research, report, documentation, 
+or development you should properly cite GWpilot in your work with the 
+following reference:
+
+A.J. Rubio-Montero et al., GWpilot: Enabling multi-level scheduling 
+in distributed infrastructures with GridWay and pilot Jobs, 
+Future Generation Computer Systems 45 (2015) 25--52.    
+http://dx.doi.org/10.1016/j.future.2014.10.003
+
+and/or with any related paper listed at:
+   http://rdgroups.ciemat.es/web/sci-track/
+
+
+===== WELCOME =====
+
+GWpilot is a complete and general-purpose pilot job framework. This system 
+provides individual users or institutions with a more easy-to-use, 
+easy-to-install, scalable, extendable, flexible and adjustable framework 
+to efficiently run legacy applications. The framework is based on the 
+GridWay meta-scheduler (http://gridway.org) and incorporates the powerful 
+features of this system, such as standard interfaces, fairshare policies, 
+ranking, migration, accounting and compatibility with diverse 
+infrastructures.
+
+GWpilot goes beyond establishing simple network overlays to overcome the 
+waiting times in remote queues or to improve the reliability in task 
+production. It properly tackles the characterisation problem in current 
+infrastructures, allowing users to arbitrarily incorporate customised 
+monitoring of resources and their running applications into the system. 
+This functionality allows the new framework to implement innovative 
+scheduling algorithms that accomplish the computational needs of a wide 
+range of calculations faster and more efficiently. The system can also be 
+easily stacked under other software layers, such as self-schedulers, 
+enabling a simplified multi-level scheduling model accessible both users 
+and developers.
+
+Its design makes GWpilot:
+- Easy-to-install and standalone.
+- Compatible with previously ported applications.
+- Interoperable with diverse grid and cloud infrastructures
+- Stackable with other systems.
+- Lightweight and scalable.
+- Highly adjustable, supporting the customisation of scheduling at several 
+levels.
+
+===== RELEASE POLICY AND SUPPORT =====
+
+Currently, the development of GWpilot is devoted to address certain goals 
+in academic research or to accomplish the objectives of certain research 
+grants in diverse scientific areas. In many cases, the only acknowledgement 
+or profit from this work is the resulting publications.
+
+For this reason, GWpilot developers will usually follow the policy of 
+publishing before including any new feature in the code. For the same 
+motivation, the troubleshooting support is not warranted in any case.
+
+These procedures could change for some communities in the scope of common 
+projects or agreements. Don't hesitate to contact with authors if you or 
+your institution are interested in any collaboration.
+
+Therefore the code, complete release notes, and current and foreseen 
+features can be found online:
+http://rdgroups.ciemat.es/web/sci-track/GWpilot
+or at the official GridWay code repository:
+https://github.com/GridWay/gwpilot
+
+
+
+===== DOCUMENTATION =====
+
+The documentation is completely online:
+http://rdgroups.ciemat.es/web/sci-track/GWpilot
+or at the official GridWay code repository:
+https://github.com/GridWay/gwpilot
+
+
+===== REQUIREMENTS =====
+
+GWpilot framework is designed to be part of the GridWay ecosystem 
+(http://gridway.org) and to accomplish the current security standars 
+stablished for Grid Computing. Thus, a GridWay instance must be correctly 
+configured before install the GWpilot Server. This includes:
+
+a) Tools to manage grid certificates (globus-proxy-utils, globus-proxy, 
+voms-clients, CAs), and data (globus-gass-copy-progs, globus-gass-server, 
+and/or  globus-gridftp-server-progs).
+
+b) GridWay (>= 5.6.1)
+
+c) To use any kind of resource provider (grid, cloud, LRMS, etc.) for 
+provisioning pilot jobs, the corresponding GridWay MAD must be previously 
+installed and configured, accomplishing their own requirements.
+
+
+Additionally, the minimal functionalities of GWpilot are achieved with the 
+GWpilot Server module, that also requires: 
+
+d) Python (>= 2.4.3)
+
+e) CherryPy (>= 3.2.0) 
+
+f) The GWutils package.
+
+
+The GWpilot Factory is an optional component that automatically manages 
+the pilot provisioning. To perform this task, Factory makes use of the 
+GWutils.EasyDRMAA library. Unfortunately, some GridWay releases include 
+performance miss-considerations or bugs that are not tackled yet in the 
+official code tree. EasyDRMAA is affected by these issues and therefore, 
+in addition to the GWutils package, the Factory requires:
+
+g) GridWay >= 5.6.1,   patched with gridway_5.6.1_5.14-GWutils-u1.0 and *-u2.0 
+
+h) The GridWay DRMAA python binding 0.1:
+http://www.gridway.org/lib/exe/fetch.php?media=ecosystem:drmaa:gw-drmaa-python-0.1.tar.gz
+(with gw-drmaa-python-0.1-GWutils-u1.0 and *-u2.0 patches).
+
+
+Specific installation tips and some tested patched releases can be found 
+in the GWpilot documentation page:
+http://rdgroups.ciemat.es/web/sci-track/GWpilot
+or at the source repository: https://github.com/GridWay/gwpilot
+
+
+===== SUMMARISED INSTALLATION =====
+
+GWpilot and  GWutils source codes can be found at:
+
+a) http://rdgroups.ciemat.es/web/sci-track/GWpilot (zipped).
+
+b) https://github.com/GridWay/gwpilot (zipped, browseable repository, 
+or via GIT and SVN).
+
+Additionally, some unofficial GridWay releases, tools and patches can be 
+found at: https://github.com/AJRubio-Montero/
+
+Over a patched GridWay installation with DRMAA python support: 
+
+1) Install CherryPy (the python-cherrypy package from repositories 
+of the Linux distribution)
+
+2) unzip GWutils.zip GWpilot.tar.gz -d <temporal folder>
+
+3) chown <GW admin user>:<GW admin group> <temporal folder>
+
+4) cp -dpR <temporal folder>/* $GW_LOCATION/
+
+5) Follow the example $GW_LOCATION/etc/gwd.conf.GWpilot 
+and configure GWpilot editing the file $GW_LOCATION/etc/gwd.conf 
+
+(Check the Installation Guide for more details.)
